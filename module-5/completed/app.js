@@ -12,7 +12,13 @@ var index = require('./routes/index');
 var api = require('./routes/api');
 var authenticate = require('./routes/authenticate')(passport);
 var mongoose = require('mongoose');                         //add for Mongo support
-mongoose.connect('mongodb://localhost/test-chirp');              //connect to Mongo
+//connect to Mongo
+if(process.env.DEV_ENV){
+    mongoose.connect('mongodb://localhost/test-chirp');
+}
+else{
+    mongoose.connect('mongodb://chirp-app:fU5J51RFe_TQc7.VpwTpr54zsh98_TCY_TCR.mMoinA-@ds062797.mongolab.com:62797/chirp-app/chirp');
+}
 var app = express();
 
 // view engine setup
